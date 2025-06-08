@@ -1,6 +1,13 @@
 import { posts } from './data.js'
 
 
+const closingbutton = document.getElementById('closingbtn')
+const commentWindow = document.getElementById('comment-window')
+
+closingbutton.addEventListener('click' ,function(){ 
+    commentWindow.style.display = 'none'
+})
+
 
 document.addEventListener('click', function(e){
     if(e.target.dataset.like){
@@ -29,8 +36,8 @@ function Handlelikebtn(id){
 
 
 
-
 function HandleCommentbtn(id){
+    commentWindow.style.display = 'flex'
     const targetpostcomment = posts.filter(function(post){
         return post.uuid === id
     })[0]

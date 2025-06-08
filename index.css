@@ -90,14 +90,43 @@ strong{
 .liked{
     color: red;
 }
-
-.comment-window{
-    height: 500px;
-    width: 500px;
+#comment{
+    background-color: white;
+    height: 100px;
+    width: 100px;
+}
+#comment-window{
+    display: none;
+    height: 600px;
+    width: 600px;
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+    margin: auto;
+    background-color: gray;
+    justify-content: center;
+    
+}
+#closingbtn{
+    position: absolute;
+    right: 1%;
+    top: 1%;
+    color: black;
+    font-size: 30px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
 
+.window-header{
+    border-bottom: 1px solid black;
+    width: 100%;
+    margin: 0 0 auto 0;
+    text-align: center;
+}
+.window-header h1{
+    font-size: 25px;
+    margin-top: 0;
 }
