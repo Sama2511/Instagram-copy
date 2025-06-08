@@ -91,6 +91,7 @@ strong{
     color: red;
 }
 #comment{
+
     background-color: white;
     height: 100px;
     width: 100px;
@@ -98,17 +99,17 @@ strong{
 #comment-window{
     display: none;
     height: 600px;
-    width: 600px;
+    width: 500px;
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     margin: auto;
-    background-color: gray;
-    justify-content: center;
-    
+    background-color: rgb(209, 208, 208);
+    flex-direction: column;
 }
+
 #closingbtn{
     position: absolute;
     right: 1%;
@@ -123,10 +124,35 @@ strong{
 .window-header{
     border-bottom: 1px solid black;
     width: 100%;
-    margin: 0 0 auto 0;
+    height: 45px;
     text-align: center;
 }
 .window-header h1{
     font-size: 25px;
     margin-top: 0;
+}
+
+#comment-text{
+    font-size: 15px;
+    margin: 0;
+}
+#usercomment{
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 0;
+    margin-top: 5px;
+}
+.commentPicture{
+    height:50px;
+    width: 50px;
+    border-radius: 50%;
+    margin: 5px 10px 0 0 ;
+}
+
+.commentbox{
+    display: flex;
+    border-bottom: 1px solid white;
+    align-items: c;
+    padding: 0 20px 10px 20px;
+    height: 75px;
 }

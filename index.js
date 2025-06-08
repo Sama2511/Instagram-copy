@@ -1,6 +1,6 @@
 import { posts } from './data.js'
 
-
+const commentarea = document.getElementById('comments')
 const closingbutton = document.getElementById('closingbtn')
 const commentWindow = document.getElementById('comment-window')
 
@@ -38,10 +38,26 @@ function Handlelikebtn(id){
 
 function HandleCommentbtn(id){
     commentWindow.style.display = 'flex'
+    let comment = ''
+
     const targetpostcomment = posts.filter(function(post){
         return post.uuid === id
     })[0]
-    
+    console.log(targetpostcomment.comments)
+    targetpostcomment.comments.forEach(function(user){
+            comment +=     
+                `
+                <div class="commentbox">
+                    <img  class="commentPicture" src="${user.avatar}">
+                    <div>
+                        <h2 id="usercomment">${user.handle}</h2>
+                        <p id="comment-text">${user.comment}</p>
+                  </div>
+                </div>
+                  `
+    })
+      commentarea.innerHTML = comment
+ 
 }
 
 function HandleDMbtn(id){
