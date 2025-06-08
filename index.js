@@ -1,76 +1,92 @@
-const posts = [
-    {
-        name: "Vincent van Gogh",
-        username: "vincey1853",
-        location: "Zundert, Netherlands",
-        avatar: "images/avatar-vangogh.jpg",
-        post: "images/post-vangogh.jpg",
-        comment: "just took a few mushrooms lol",
-        likes: 21
-    },
-    {
-        name: "Gustave Courbet",
-        username: "gus1819",
-        location: "Ornans, France",
-        avatar: "images/avatar-courbet.jpg",
-        post: "images/post-courbet.jpg",
-        comment: "i'm feelin a bit stressed tbh",
-        likes: 4
-    },
-        {
-        name: "Joseph Ducreux",
-        username: "jd1735",
-        location: "Paris, France",
-        avatar: "images/avatar-ducreux.jpg",
-        post: "images/post-ducreux.jpg",
-        comment: "gm friends! which coin are YOU stacking up today?? post below and WAGMI!",
-        likes: 152
+import { posts } from './data.js'
+
+
+
+document.addEventListener('click', function(e){
+    if(e.target.dataset.like){
+        Handlelikebtn(e.target.dataset.like)
+    }else if(e.target.dataset.comment){
+        HandleCommentbtn(e.target.dataset.comment)
+    }else if(e.target.dataset.dm){
+        HandleDMbtn(e.target.dataset.dm)
     }
-]
-
-const mainEl = document.getElementById("main-el")
+})
 
 
 
-function renderPosts(){
-    let profiles = ''
-    for (i = 0 ; i < posts.length ; i++){
-        profiles += `            
-                <main id="main-el">
-                    <section class="account">
-                        <img id="icon-avatar" src="${posts[i].avatar}">
-                        <h1> ${posts[i].name}</h1>
-                        <p> ${posts[i].location}</p>
-                    </section>
-                    <div>
-                        <img  id="post-avatar" src="${posts[i].post}">
-                    </div>
-                    <section class="captain">
-                        <div class="icons">
-                            <img id="icon" class="likeButton" src="images/icon-heart.png">
-                            <img id="icon" src="images/icon-comment.png">
-                            <img id="icon" src="images/icon-dm.png">
-                        </div>
-                        <h2> <span id="likes">${posts[i].likes}</span> likes</h2>
-                        <p> <strong>${posts[i].username}</strong> ${posts[i].comment}</p>
-                    </section>
-                    <h3 id="bottomSpace"></h3>
-                </main>
-                `
-        }
-    mainEl.innerHTML = profiles
+function Handlelikebtn(id){
+    const targetpostlike = posts.filter(function(post){
+        return post.uuid === id
+    })[0]
+    if(targetpostlike.isLiked){
+        targetpostlike.likes--
+    }else{
+        targetpostlike.likes++
+    }
+    targetpostlike.isLiked = !targetpostlike.isLiked
+    render()
 }
 
 
 
-renderPosts()
 
-const likeButtons = document.querySelectorAll('.likeButton')
-const likesCounts = document.querySelectorAll("#likes")
+function HandleCommentbtn(id){
+    const targetpostcomment = posts.filter(function(post){
+        return post.uuid === id
+    })[0]
+    
+}
 
-likeButtons.forEach((button, i) =>{
-    button.addEventListener('click', function(){
-        let current = parseInt(likesCounts[i].textContent)
-        likesCounts[i].textContent = current + 1
+function HandleDMbtn(id){
+    const targetpostdm = posts.filter(function(post){
+        return post.uuid === id
+    }) [0]
+    console.log(targetpostdm)
+}
+
+
+
+function buildPosts(){
+
+    let profiles = ''
+    posts.forEach(function(post){
+        let likeIconClass = ''
+        if(post.isLiked){
+            likeIconClass = 'liked'
+        }
+
+        profiles += `            
+                <main id="main-el">
+                    <section class="account">
+                        <img id="icon-avatar" src="${post.avatar}">
+                        <h1> ${post.name}</h1>
+                        <p> ${post.location}</p>
+                    </section>
+                    <div>
+                        <img  id="post-avatar" src="${post.postimg}">
+                    </div>
+                    <section class="captain">
+                        <div class="icons">
+                            <i class="fa-solid fa-heart ${likeIconClass} " data-like='${post.uuid}'></i>
+                            <i class="fa-regular fa-comment " data-comment ='${post.uuid}'></i>
+                            <i class="fa-regular fa-paper-plane " data-dm ='${post.uuid}'></i>
+                        </div>
+                        <h2> <span id="likes">${post.likes}</span> likes</h2>
+                        <p> <strong>${post.username}</strong> ${post.comment}</p>
+                    </section>
+                    <h3 id="bottomSpace"></h3>
+                </main>
+
+                `
     })
-})
+    return profiles
+
+        }
+
+
+function render(){
+        document.getElementById("main-el").innerHTML = buildPosts()
+}
+
+render()
+
